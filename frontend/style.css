@@ -1,0 +1,15 @@
+body {
+  font-family: sans-serif;
+  padding: 2rem;
+  background-color: #f9f9f9;
+}
+
+form {
+  margin-bottom: 2rem;
+}
+
+canvas {
+  max-width: 100%;
+  margin-bottom: 2rem;
+}
+ 

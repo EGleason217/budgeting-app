@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Budget Projections</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Account Projections Dashboard</h1>
+
+  <form id="projectionForm">
+    <label>Month (MM): <input type="text" id="month" value="06" /></label>
+    <label>Year (YYYY): <input type="text" id="year" value="2025" /></label>
+    <button type="submit">Get Projections</button>
+  </form>
+
+  <div id="chartsContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+ 
