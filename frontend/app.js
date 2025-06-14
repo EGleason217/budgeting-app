@@ -9,7 +9,7 @@ document
     chartsContainer.innerHTML = "";
 
     const response = await fetch(
-      `https://your-render-url.com/projections?month=${month}&year=${year}`
+      `https://budget-visualizer.netlify.app/projections?month=${month}&year=${year}`
     );
     const data = await response.json();
 
