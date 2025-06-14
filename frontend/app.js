@@ -6,7 +6,7 @@ document.getElementById('projectionForm').addEventListener('submit', async funct
   const chartsContainer = document.getElementById('chartsContainer');
   chartsContainer.innerHTML = '';
 
-  const response = await fetch(`http://localhost:3000/projections?month=${month}&year=${year}`);
+  const response = await fetch(`https://budgeting-app-73du.onrender.com/projections?month=${month}&year=${year}`);
   const data = await response.json();
 
   data.forEach(account => {
