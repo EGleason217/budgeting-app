@@ -1,24 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Budget Projections</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-  <h1>Account Projections Dashboard</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Budget Projections</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <h2>Add New Entry</h2>
+    <form id="entryForm">
+      <label>
+        Account:
+        <select id="accountId"></select> </label
+      ><br />
+      <label>
+        Type:
+        <select id="type">
+          <option value="income">Income</option>
+          <option value="expense">Expense</option>
+          <option value="fee">Fee</option>
+        </select> </label
+      ><br />
+      <label> Amount: <input type="number" id="amount" required /> </label
+      ><br />
+      <label> Description: <input type="text" id="description" /> </label><br />
+      <label> Start Date: <input type="date" id="startDate" required /> </label
+      ><br />
+      <label> Is Recurring? <input type="checkbox" id="isRecurring" /> </label
+      ><br />
+      <label>
+        Recurrence:
+        <select id="recurrence">
+          <option value="">None</option>
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="monthly">Monthly</option>
+        </select> </label
+      ><br />
+      <button type="submit">Add Entry</button>
+    </form>
+    <hr />
+    <h1>Account Projections Dashboard</h1>
 
-  <form id="projectionForm">
-    <label>Month (MM): <input type="text" id="month" value="06" /></label>
-    <label>Year (YYYY): <input type="text" id="year" value="2025" /></label>
-    <button type="submit">Get Projections</button>
-  </form>
+    <form id="projectionForm">
+      <label>Month (MM): <input type="text" id="month" value="06" /></label>
+      <label>Year (YYYY): <input type="text" id="year" value="2025" /></label>
+      <button type="submit">Get Projections</button>
+    </form>
 
-  <div id="chartsContainer"></div>
+    <div id="chartsContainer"></div>
 
-  <script src="app.js"></script>
-</body>
+    <script src="app.js"></script>
+  </body>
 </html>
- 

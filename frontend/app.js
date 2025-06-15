@@ -50,4 +50,50 @@ document
         },
       });
     });
+    const BASE_URL = "https://budgeting-app-73du.onrender.com";
+
+    // Load account options into dropdown
+    async function loadAccounts() {
+      const res = await fetch(`${BASE_URL}/accounts`);
+      const accounts = await res.json();
+      const select = document.getElementById("accountId");
+      select.innerHTML = "";
+      accounts.forEach((account) => {
+        const opt = document.createElement("option");
+        opt.value = account.id;
+        opt.textContent = account.name;
+        select.appendChild(opt);
+      });
+    }
+
+    loadAccounts();
+
+    document
+      .getElementById("entryForm")
+      .addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const entry = {
+          accountId: parseInt(document.getElementById("accountId").value),
+          type: document.getElementById("type").value,
+          amount: parseFloat(document.getElementById("amount").value),
+          description: document.getElementById("description").value,
+          startDate: document.getElementById("startDate").value,
+          isRecurring: document.getElementById("isRecurring").checked,
+          recurrence: document.getElementById("recurrence").value || null,
+        };
+
+        const res = await fetch(`${BASE_URL}/entries`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(entry),
+        });
+
+        if (res.ok) {
+          alert("Entry added!");
+          document.getElementById("entryForm").reset();
+        } else {
+          alert("Failed to add entry.");
+        }
+      });
   });
