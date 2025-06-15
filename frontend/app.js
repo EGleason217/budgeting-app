@@ -51,9 +51,11 @@ document.getElementById("entryForm").addEventListener("submit", async (e) => {
   if (res.ok) {
     alert("Entry added!");
     document.getElementById("entryForm").reset();
-    await loadProjections(); // Re-render charts after adding entry
+    await loadProjections();
   } else {
-    alert("Failed to add entry.");
+    const errorData = await res.json();
+    console.error("Backend error:", errorData);
+    alert(`Failed to add entry. ${errorData.error || ""}`);
   }
 });
 
