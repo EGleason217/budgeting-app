@@ -72,6 +72,7 @@ async function loadProjections() {
     `${BASE_URL}/projections?month=${month}&year=${year}`
   );
   const data = await response.json();
+  console.log("Projection data:", data); // <-- Add this
 
   data.forEach((account) => {
     const labels = Object.keys(account.dailyBalances);
