@@ -51,16 +51,16 @@ document.getElementById("entryForm").addEventListener("submit", async (e) => {
   if (res.ok) {
     alert("Entry added!");
     document.getElementById("entryForm").reset();
-    await loadProjections();
+    await loadProjections(); // Re-render charts after adding entry
   } else {
-    const errorData = await res.json();
-    console.error("Backend error:", errorData);
-    alert(`Failed to add entry. ${errorData.error || ""}`);
+    const error = await res.json();
+    console.error("Backend error:", error);
+    alert(`Failed to add entry. ${error.error || ""}`);
   }
 });
 
 // -------------------------------
-// Load & Display Projections
+// Load & Display Projections with Alerts
 // -------------------------------
 async function loadProjections() {
   const month = document.getElementById("month").value;
@@ -77,6 +77,11 @@ async function loadProjections() {
     const labels = Object.keys(account.dailyBalances);
     const balances = Object.values(account.dailyBalances);
 
+    // 🔴 Identify overdraft days
+    const overdraftPoints = balances
+      .map((b, i) => (b < 0 ? { x: labels[i], y: b } : null))
+      .filter(Boolean);
+
     const canvas = document.createElement("canvas");
     chartsContainer.appendChild(canvas);
 
@@ -91,6 +96,15 @@ async function loadProjections() {
             borderColor: "green",
             backgroundColor: "rgba(0, 128, 0, 0.1)",
             fill: true,
+            tension: 0.1,
+          },
+          {
+            label: "Overdraft",
+            data: overdraftPoints,
+            pointRadius: 5,
+            pointBackgroundColor: "red",
+            borderColor: "transparent",
+            showLine: false,
           },
         ],
       },
@@ -110,7 +124,7 @@ async function loadProjections() {
       },
     });
 
-    // 🔔 Optional visual alerts (Phase 2 — coming next!)
+    // 🔔 Optional text alert
     if (account.alerts?.length) {
       const alertBox = document.createElement("div");
       alertBox.style.color = "red";
